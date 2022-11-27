@@ -42,7 +42,7 @@ void lsCalling(char *input1[], char **input2) {
     input1[3] = NULL;
     input1[4] = NULL;
     input1[5] = NULL;
-    inputaGoreFonk(input1[0], input1, input2);
+    inputaGoreFonk("/bin/ls", input1, input2);
 }
 
 void bashCalling(char *input1[], char **input2) {
@@ -52,12 +52,12 @@ void bashCalling(char *input1[], char **input2) {
     input1[3] = NULL;
     input1[4] = NULL;
     input1[5] = NULL;
-    inputaGoreFonk(input1[0], input1, input2);
+    inputaGoreFonk("/bin/bash", input1, input2);
 }
 
 int main(int argc, char *argv[], char** envp) {
+    
     while(1)  {
-
     
         int counter = 0;
         char input[50];
@@ -66,9 +66,9 @@ int main(int argc, char *argv[], char** envp) {
         char *split = strtok(input, " ");
         char inputs[10][10];
         while(split != NULL) {
-            strcpy(inputs[counter], split);
+            strcpy(inputs[i], split);
             split = strtok(NULL, " ");
-            counter++;
+            i++;
         }
         char *newargv[6];
 

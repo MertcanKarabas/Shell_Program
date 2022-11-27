@@ -27,11 +27,14 @@ int main(int argc, char *argv[], char** envp) {
         char *split = strtok(input, " ");
         char inputs[10][10];
         while(split != NULL) {
+            if (strcmp(split, "writef") == 0){
+            
+            }
             strcpy(inputs[i], split);
             split = strtok(NULL, " ");
             i++;
         }
-        
+         
         for (int i = 0; i < 3; i++) {
             printf("%s\n", inputs[i]);
         }

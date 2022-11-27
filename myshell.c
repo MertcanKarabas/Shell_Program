@@ -7,19 +7,43 @@
 #include <string.h>
 
 int main(int argc, char *argv[], char** envp) {
-    while(1) {
-        int i;
+
+    while(1)  {
+    
+        int counter = 0;
         char input[50];
         printf("MyShell >> ");
-        scanf("%s", input);
+        fgets(input, 50, stdin);
 
-        if (strcmp(input, "exit") == 0){
+        if (strcmp(input, "exit\n") == 0){
             return 0;
-        } else if(strcmp(input, "ls") == 0) {
-            system("ls");
+
+        } else if(strcmp(input, "ls\n") == 0) {
+            int i, f;
+            f = fork();
+
+            if(f == 0) { //child
+                 i = execve("/bin/ls", argv, envp);
+            } else if(f > 0){ //parent
+                wait(&i);
+            } else { //error
+                printf("Fork yapılamadı...");
+            }
             
-        } else if(strcmp(input, "bash") == 0) {
-            system("bash");
+        } else if(strcmp(input, "bash\n") == 0) {
+            int i, f;
+            f = fork();
+
+            if(f == 0) { //child
+                 i = execve("/bin/bash", argv, envp);
+            } else if(f > 0){ //parent
+                wait(&i);
+            } else { //error
+                printf("Fork yapılamadı...");
+            }
+
+        } else if(strcmp(input, "cat") == 0) {
+
         } else {
             printf("Yanlış argüman girildi\n");
         }
