@@ -56,7 +56,7 @@ void bashCalling(char *input1[], char **input2) {
 }
 
 int main(int argc, char *argv[], char** envp) {
-    
+
     while(1)  {
     
         int counter = 0;
@@ -75,13 +75,13 @@ int main(int argc, char *argv[], char** envp) {
         if (strcmp(input, "exit") == 0){
             return 0;
 
-        } else if(strcmp(input, "ls") == 0) {
+        } else if(strcmp(input, "ls\n") == 0) {
             lsCalling(newargv, envp);
 
-        } else if(strcmp(input, "bash") == 0) {
+        } else if(strcmp(input, "bash\n") == 0) {
             bashCalling(newargv, envp);
 
-        } else if(strcmp(input, "cat") == 0) {
+        } else if(strcmp(input, "cat\n") == 0) {
             bashCalling(newargv, envp);
 
         } else {
