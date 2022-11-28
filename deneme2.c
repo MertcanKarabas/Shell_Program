@@ -36,23 +36,13 @@ void catCalling() {
 }
 
 void lsCalling(char *input1[], char **input2) {
-    input1[0] = "/bin/ls";
-    input1[1] = NULL;
-    input1[2] = NULL;
-    input1[3] = NULL;
-    input1[4] = NULL;
-    input1[5] = NULL;
-    inputaGoreFonk("/bin/ls", input1, input2);
+    
 }
 
 void bashCalling(char *input1[], char **input2) {
-    input1[0] = "/bin/ls";
-    input1[1] = NULL;
-    input1[2] = NULL;
-    input1[3] = NULL;
-    input1[4] = NULL;
-    input1[5] = NULL;
-    inputaGoreFonk("/bin/bash", input1, input2);
+    if(strcmp(input1[0], "bash") == 0 ) {
+        inputaGoreFonk("/bin/bash", input1, input2);
+    }
 }
 
 int main(int argc, char *argv[], char** envp) {
@@ -63,26 +53,40 @@ int main(int argc, char *argv[], char** envp) {
         char input[50];
         printf("MyShell >> ");
         fgets(input, 50, stdin);
-        char *split = strtok(input, " ");
-        char inputs[10][10];
-        while(split != NULL) {
-            strcpy(inputs[i], split);
-            split = strtok(NULL, " ");
-            i++;
-        }
-        char *newargv[6];
 
-        if (strcmp(input, "exit") == 0){
+        char *split = strtok(input, " ");
+        char *inputs[10];
+        while(split != NULL) {
+            strcpy(inputs[counter], split);
+            split = strtok(NULL, " ");
+            counter++;
+        }
+
+        if (strcmp(input, "exit\n") == 0){
             return 0;
 
         } else if(strcmp(input, "ls\n") == 0) {
-            lsCalling(newargv, envp);
+
+            int i, f;
+            f = fork();
+
+            if(f == 0) { //child
+                 i = execve("/bin/ls", argv, envp);
+            } else if(f > 0){ //parent
+                wait(&i);
+            } else { //error
+                printf("Fork yapılamadı...");
+            }
 
         } else if(strcmp(input, "bash\n") == 0) {
-            bashCalling(newargv, envp);
+
+            bashCalling(inputs, envp);
 
         } else if(strcmp(input, "cat\n") == 0) {
-            bashCalling(newargv, envp);
+            
+
+        } else if(strcmp(input, "clear\n") == 0) {
+            printf("\e[1;1H\e[2J");
 
         } else {
             printf("Yanlış argüman girildi\n");

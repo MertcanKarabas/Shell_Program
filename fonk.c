@@ -6,38 +6,34 @@
 #include <sys/wait.h>
 #include <string.h>
 
-void fonk(char *param) {
-    for (int i = 0; i < 3; i++) {
-            printf("%s\n", (param + i));
-            while(param != NULL) {
-                if (strcmp(param, '\n') == 0 ) {
-                    break;
-                } else {
-                    param++;
-                }
-            }
+void fonk(char *ptr[]) {
+    if(strcmp(ptr[0], "abc") == 0) {
+        printf("OLDU");
+    } 
+    if(strcmp(ptr[1], "def") == 0) {
+        printf("Sen bu işi biliyorsun");
     }
 }
-
 int main(int argc, char *argv[], char** envp) {
-    int i = 0, f;
-        char input[50];
-        printf("MyShell >> ");
-        fgets(input, 50, stdin);
-        char *split = strtok(input, " ");
-        char inputs[10][10];
-        while(split != NULL) {
-            if (strcmp(split, "writef") == 0){
-            
-            }
-            strcpy(inputs[i], split);
-            split = strtok(NULL, " ");
-            i++;
-        }
+    
+    char input[50];
+    printf("MyShell >> ");
+    fgets(input, 50, stdin);
+
+    char *split = strtok(input, " ");
+    char *ptr[10];
+
+    int i = 0;
+    while(split != NULL) {
+        strcpy(ptr[i], split);
+        split = strtok(NULL, " ");
+        i++;
+    }
          
-        for (int i = 0; i < 3; i++) {
-            printf("%s\n", inputs[i]);
-        }
-       // fonk(&inputs);
+    for (int i = 0; i < 3; i++) {
+        printf("%s\n", ptr[i]);
+    }
+
+    fonk(ptr);
     return 0;
 }

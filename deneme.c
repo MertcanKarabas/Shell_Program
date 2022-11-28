@@ -10,7 +10,6 @@ int main(int argc, char *argv[], char** envp) {
 
     while(1)  {
     
-        int counter = 0;
         char input[50];
         printf("MyShell >> ");
         fgets(input, 50, stdin);
@@ -43,7 +42,10 @@ int main(int argc, char *argv[], char** envp) {
             }
 
         } else if(strcmp(input, "cat") == 0) {
-            
+
+        } else if(strcmp(input, "clear\n") == 0) {
+            printf("\e[1;1H\e[2J");
+
         } else {
             printf("Yanlış argüman girildi\n");
         }
