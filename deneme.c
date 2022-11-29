@@ -22,7 +22,7 @@ int main(int argc, char *argv[], char** envp) {
             f = fork();
 
             if(f == 0) { //child
-                 i = execve("/bin/ls", argv, envp);
+                 i = execvp("/bin/ls", argv);
             } else if(f > 0){ //parent
                 wait(&i);
             } else { //error
@@ -34,7 +34,7 @@ int main(int argc, char *argv[], char** envp) {
             f = fork();
 
             if(f == 0) { //child
-                 i = execve("/bin/bash", argv, envp);
+                 i = execvp("/bin/bash", argv);
             } else if(f > 0){ //parent
                 wait(&i);
             } else { //error

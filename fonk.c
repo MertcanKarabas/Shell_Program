@@ -1,17 +1,18 @@
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <string.h>
+
 
 void fonk(char *ptr[]) {
     if(strcmp(ptr[0], "abc") == 0) {
         printf("OLDU");
     } 
     if(strcmp(ptr[1], "def") == 0) {
-        printf("Sen bu işi biliyorsun");
+        printf("Sen bi harkiasın");
     }
 }
 int main(int argc, char *argv[], char** envp) {
@@ -20,14 +21,16 @@ int main(int argc, char *argv[], char** envp) {
     printf("MyShell >> ");
     fgets(input, 50, stdin);
 
-    char *split = strtok(input, " ");
+    
     char *ptr[10];
-
     int i = 0;
-    while(split != NULL) {
-        strcpy(ptr[i], split);
-        split = strtok(NULL, " ");
-        i++;
+    char * token = strtok(input, " ");
+    
+    // loop through the string to extract all other tokens
+    while( token != NULL ) {
+      ptr[i] = token; //printing each token
+      token = strtok(NULL, " ");
+      i++;
     }
          
     for (int i = 0; i < 3; i++) {

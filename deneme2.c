@@ -12,36 +12,11 @@ void inputaGoreFonk(char *string, char *input1[], char **input2) {
 
     if(f == 0) { //child
         i = execve(string, input1, input2);
+        perror("error");
     } else if(f > 0){ //parent
        wait(&i);
     } else { //error
         printf("Fork yapılamadı...");
-    }
-}
-
-void execxCalling() {
-
-}
-
-void writefCalling() {
-
-}
-
-void clearCalling() {
-
-}
-
-void catCalling() {
-
-}
-
-void lsCalling(char *input1[], char **input2) {
-    
-}
-
-void bashCalling(char *input1[], char **input2) {
-    if(strcmp(input1[0], "bash") == 0 ) {
-        inputaGoreFonk("/bin/bash", input1, input2);
     }
 }
 
@@ -57,35 +32,26 @@ int main(int argc, char *argv[], char** envp) {
         char *split = strtok(input, " ");
         char *inputs[10];
         while(split != NULL) {
-            strcpy(inputs[counter], split);
+            inputs[counter] = split;
             split = strtok(NULL, " ");
             counter++;
         }
-
-        if (strcmp(input, "exit\n") == 0){
+        
+        if ((strcmp(inputs[0], "exit\n") == 0)){
             return 0;
 
-        } else if(strcmp(input, "ls\n") == 0) {
+        } else if((strcmp(inputs[0], "ls\n") == 0)) {
 
-            int i, f;
-            f = fork();
+            inputaGoreFonk("/bin/ls", inputs, envp);
 
-            if(f == 0) { //child
-                 i = execve("/bin/ls", argv, envp);
-            } else if(f > 0){ //parent
-                wait(&i);
-            } else { //error
-                printf("Fork yapılamadı...");
-            }
+        } else if((strcmp(inputs[0], "bash\n") == 0)) {
 
-        } else if(strcmp(input, "bash\n") == 0) {
-
-            bashCalling(inputs, envp);
+            inputaGoreFonk("/bin/bash", inputs, envp);
 
         } else if(strcmp(input, "cat\n") == 0) {
             
 
-        } else if(strcmp(input, "clear\n") == 0) {
+        } else if((strcmp(inputs[0], "clear\n") == 0)) {
             printf("\e[1;1H\e[2J");
 
         } else {
