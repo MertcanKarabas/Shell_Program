@@ -66,7 +66,7 @@ int main(int argc, char *argv[], char** envp) {
             inputaGoreFonk("writef", inputs, envp);
 
         } else if(strcmp(inputs[0], "execx") == 0 && (strcmp(inputs[1], "-t") == 0)){
-            inputaGoreFonk("writef", inputs, envp);
+            inputaGoreFonk("execx", inputs, envp);
 
         } else if((strcmp(inputs[0], "clear\n") == 0)) {
             printf("\e[1;1H\e[2J");
