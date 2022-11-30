@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     timeinfo = localtime ( &rawtime );
 
     //File operations
-    FILE *fp = fopen(argv[1], "a+");
+    FILE *fp = fopen(argv[2], "a+");
     fprintf(fp, "pid: %d, ppid: %d, Local time and date: %s", getpid(), getppid(), asctime(timeinfo));
     fclose(fp);
 

@@ -62,7 +62,7 @@ int main(int argc, char *argv[], char** envp) {
         } else if(strcmp(inputs[0], "cat") == 0) {
             cat(inputs);
 
-        } else if(strcmp(inputs[0], "writef") == 0){
+        } else if(strcmp(inputs[0], "writef") == 0 && (strcmp(inputs[1], "-f") == 0)){
             inputaGoreFonk("writef", inputs, envp);
 
         } else if((strcmp(inputs[0], "clear\n") == 0)) {
