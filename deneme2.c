@@ -19,7 +19,6 @@ void inputaGoreFonk(char *string, char *input1[], char **input2) {
         printf("Fork yapılamadı...");
     }
 }
-
 void cat(char *input1[]) {
     int i = 1;
     printf("cat: ");
@@ -48,10 +47,7 @@ int main(int argc, char *argv[], char** envp) {
             counter++;
         }
         int i = 0;
-        while (inputs[i] != NULL) {
-            printf("%c", *inputs[i]);
-            i++;
-        }
+        
         if ((strcmp(inputs[0], "exit\n") == 0) ){
             return 0;
 
@@ -65,6 +61,9 @@ int main(int argc, char *argv[], char** envp) {
 
         } else if(strcmp(inputs[0], "cat") == 0) {
             cat(inputs);
+
+        } else if(strcmp(inputs[0], "writef") == 0){
+            inputaGoreFonk("writef", inputs, envp);
 
         } else if((strcmp(inputs[0], "clear\n") == 0)) {
             printf("\e[1;1H\e[2J");
