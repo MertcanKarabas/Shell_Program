@@ -31,8 +31,7 @@ void cat(char *input1[]) {
 
 int main(int argc, char *argv[], char** envp) {
 
-    while(1)  {
-    
+    while(1)  { 
        
         char input[50];
         printf("MyShell >> ");
